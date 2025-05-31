@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 
+test.describe ('Тесты главной страницы', () =>{
+  test.beforeEach(async ({page})  =>{
+    await page.goto('https://playwright.dev/');
+  }) 
 test('Проверка отображения элементов навигации хедера', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect(page.getByRole('link', { name: 'Playwright logo Playwright' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Docs' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'API' })).toBeVisible();
@@ -14,7 +17,6 @@ test('Проверка отображения элементов навигац�
 });
 
 test('Проверка названия элементов навигации хедера', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect(page.getByRole('link', { name: 'Playwright logo Playwright' })).toContainText('Playwright');
   await expect(page.getByRole('link', { name: 'Docs' })).toContainText('Docs');
   await expect(page.getByRole('link', { name: 'API' })).toContainText('API');
@@ -23,7 +25,6 @@ test('Проверка названия элементов навигации х
 });
 
 test('Проверка атрибутов href элементов навигации хедера ', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect(page.getByRole('link', { name: 'Playwright logo Playwright' })).toHaveAttribute('href','/');
   await expect(page.getByRole('link', { name: 'Docs' })).toHaveAttribute('href','/docs/intro');
   await expect(page.getByRole('link', { name: 'API' })).toHaveAttribute('href','/docs/api/class-playwright');
@@ -33,7 +34,6 @@ test('Проверка атрибутов href элементов навигац
 });
 
 test('Проверка переключения лайт мода ', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await page.getByRole('button', { name: 'Switch between dark and light' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme-choice','light');
   await page.getByRole('button', { name: 'Switch between dark and light' }).click();
@@ -43,15 +43,13 @@ test('Проверка переключения лайт мода ', async ({ pa
 }); 
 
 test('Проверка заголовка страницы', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect(page.getByRole('banner')).toBeVisible();
   await expect(page.getByRole('banner')).toContainText('Playwright enables reliable end-to-end testing for modern web apps.');
 }); 
 
 test('Проверка кнопки Get started', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect(page.getByRole('link', { name: 'Get started' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Get started' })).toContainText('Get started');
   await expect(page.getByRole('link', { name: 'Get started' })).toHaveAttribute('href','/docs/intro');
 
-}); 
+}); } )
